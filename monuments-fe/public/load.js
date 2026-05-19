@@ -9,6 +9,17 @@ form.onsubmit = handleSubmit;
 async function handleSubmit(event) {
     event.preventDefault();
 
+    const button = document.querySelector("button");
+    if (button.textContent === "Add") {
+        await fetchMonument("post");
+        //TODO add a new monument card
+    } else if (button.textContent === "Edit") {
+        await fetchMonument("put");
+        //TODO update the monument card you edited
+    }
+}
+
+async function fetchMonument(httpVerb) {
     //get our form values
     const name = document.querySelector("#name").value;
     const yearCompleted = document.querySelector("#yearCompleted").value;
@@ -23,11 +34,10 @@ async function handleSubmit(event) {
         heightFeet,
         theme
     }
-    console.log(formValues);
 
     const url = "http://localhost:8000/api/monuments";
     const config = {
-        method: "post",
+        method: httpVerb,
         headers: {
             "Content-Type": "application/json"
         },
@@ -35,7 +45,7 @@ async function handleSubmit(event) {
     }
     const response = await fetch(url, config);
     console.log(response);
-    console.log("Form submitted!");
+    console.log(`Form submitted (${httpVerb})!`);
 }
 
 //connect to API + gather data
@@ -101,10 +111,32 @@ function addMonumentCard(monument, grid) {
     liDelete.appendChild(aDelete);
     appendAll(ulLinks, [liEdit, liDelete]);
 
+    liEdit.onclick = (event) => {
+        event.preventDefault(); //stop the link behavior
+        editMonument(monument);
+    }
+
     //add them to the dom
     appendAll(div, [h2, hr, pYear, pType, ulLinks]);
 
     grid.appendChild(div);
+}
+
+function editMonument(monument) {
+    console.log(monument);
+    const { name, yearCompleted, type } = monument;
+
+    document.querySelector("#name").value = name;
+    document.querySelector("#yearCompleted").value = yearCompleted;
+    document.querySelector("#type").value = type;
+    document.querySelector("#heightFeet").value = "";
+    document.querySelector("#theme").value = "";
+
+    document.querySelector("button").textContent = "Edit";
+}
+
+function deleteMonument(monument) {
+
 }
 
 function appendAll(parent, children) {
