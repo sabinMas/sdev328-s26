@@ -173,8 +173,18 @@ export const addMonument = mon => {
 
 export const updateMonument = updatedMon => {
     //how to find which monument this is?
+    const foundMon = data.find(el => el.name === updatedMon.name);
 
     //did I find the monument?
+    if (foundMon) {
+        //update the monument found...
+        foundMon.yearCompleted = updatedMon.yearCompleted;
+        foundMon.type = updatedMon.type;
+        foundMon.height = updatedMon.height;
+        foundMon.theme = updatedMon.theme;
 
-    //update the monument found...
+        return true;
+    } else {
+        return false;
+    }
 }
