@@ -61,20 +61,29 @@ function showError() {
 
 //update the page with monuments
 function showMonuments(mons) {
-    const grid = document.querySelector("#monuments-grid");
+    addMonumentCard(monument, grid);
+    
+    // const grid = document.querySelector("#monuments-grid");
 
-    for (let monument of mons) {
-        const { name, yearCompleted, type } = monument;
+    // for (let monument of mons) {
+    //     const { name, yearCompleted, type } = monument;
 
-        const monumentCard = `
-            <div class="monument">
-                <h2>${name}</h2>
-                <hr>
-                <p class="year">Year: ${yearCompleted}</p>
-                <p>Type: ${type}</p>
-            </div>
-        `
+    //     const monumentCard = `
+    //         <div class="monument">
+    //             <h2>${name}</h2>
+    //             <hr>
+    //             <p class="year">Year: ${yearCompleted}</p>
+    //             <p>Type: ${type}</p>
+    //         </div>
+    //     `
 
-        grid.innerHTML += monumentCard;
-    }
+    //     grid.innerHTML += monumentCard;
+    // }
+}
+function addMonumentCard(monument,grid){
+    const div = document.createElement("div")
+    const h2 = document.createElement("h2")
+    const hr = document.createElement("hr")
+    const pYear = document.createElement("p")
+    const pType = document.createElement("p")
 }
