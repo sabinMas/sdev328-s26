@@ -36,3 +36,38 @@ form {
         margin-bottom: 0.5rem;
     }
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    list-style-type: none;
+    padding-left: 0;
+
+    a {
+        color: white;
+        text-transform: uppercase;
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    list-style-type: none;
+    padding: 0;
+
+    a {
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        &:hover {
+            color: rgb(245, 228, 179);
+        }
+    }
+
+    /* a:hover {
+        color: rgb(245, 228, 179);
+    } */
+}
