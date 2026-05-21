@@ -11,10 +11,10 @@ async function handleSubmit(event) {
 
     const button = document.querySelector("button");
     if (button.textContent === "Add") {
-        await fetchMonument("post");
-        //TODO add a new monument card
+        const monumentData = await fetchMonument("post");
+        addMonumentCard(monumentData);
     } else if (button.textContent === "Edit") {
-        await fetchMonument("put");
+        const monumentData = await fetchMonument("put");
         //TODO update the monument card you edited
     }
 }
@@ -46,6 +46,9 @@ async function fetchMonument(httpVerb) {
     const response = await fetch(url, config);
     console.log(response);
     console.log(`Form submitted (${httpVerb})!`);
+
+    //return values saved/updated so we can update the UI elsewhere
+    return formValues;
 }
 
 //connect to API + gather data
@@ -71,31 +74,25 @@ function showError() {
 
 //update the page with monuments
 function showMonuments(mons) {
-    addMonumentCard(monument, grid);
-    
-    // const grid = document.querySelector("#monuments-grid");
-
     for (let monument of mons) {
-        addMonumentCard(monument, grid);
-        // const { name, yearCompleted, type } = monument;
-        // const monumentCard = `
-        //     <div class="monument">
-        //         <h2>${name}</h2>
-        //         <hr>
-        //         <p class="year">Year: ${yearCompleted}</p>
-        //         <p>Type: ${type}</p>
-        //     </div>
-        // `
+        addMonumentCard(monument);
     }
 }
 
-function addMonumentCard(monument, grid) {
+function slugify(monumentName) {
+    return monumentName.replaceAll(" ", "-");
+}
+
+function addMonumentCard(monument) {
+    const grid = document.querySelector("#monuments-grid");
+
     //create our elements
     const { name, yearCompleted, type } = monument;
     const [div, h2, hr, pYear, pType, ulLinks, liEdit, liDelete, aEdit, aDelete] = 
-          createElements(["div", "h2", "hr", "p", "p", "ul", "li", "li", "a", "a"]);
+        createElements(["div", "h2", "hr", "p", "p", "ul", "li", "li", "a", "a"]);
 
     //configure them
+    div.id = slugify(name); //set the name as the id
     div.className = "monument";
     h2.textContent = name;
     pYear.className = "year";
@@ -125,7 +122,6 @@ function addMonumentCard(monument, grid) {
 }
 
 function editMonument(monument) {
-    console.log(monument);
     const { name, yearCompleted, type } = monument;
 
     document.querySelector("#name").value = name;
