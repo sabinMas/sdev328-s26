@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup Step 1</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="<%= bodyClass %>">
+    <header class="bar">
+        <div class="brand">Multi-Form Session</div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/cookies">Cookies</a>
+            <a href="/profile">Profile</a>
+            <a href="/signup/step/1">Multi-Form</a>
+            <a href="/status">Status</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Step 1</h1>
+
+        <form method="POST" action="/signup/step/1" class="stack">
+            <label>
+                First name
+                <input name="firstName" value="<%= signup.firstName || "" %>">
+            </label>
+
+            <label>
+                Last name
+                <input name="lastName" value="<%= signup.lastName || "" %>">
+            </label>
+
+            <button type="submit">Next</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Status</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="<%= bodyClass %>">
+    <header class="bar">
+        <div class="brand">Status</div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/cookies">Cookies</a>
+            <a href="/profile">Profile</a>
+            <a href="/signup/step/1">Multi-Form</a>
+            <a href="/status">Status</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>State Status</h1>
+
+        <h2>Cookies</h2>
+        <pre class="code"><%= JSON.stringify(cookies, null, 4) %></pre>
+
+        <h2>Session</h2>
+        <pre class="code"><%= JSON.stringify(session, null, 4) %></pre>
+
+        <p class="muted">JSON endpoint: <a href="/api/status.json">/api/status.json</a></p>
+    </main>
+</body>
+</html> 
