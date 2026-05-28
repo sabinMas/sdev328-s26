@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session"
 import path from "path";
 
 import indexRoutes from "./routers/index.routes.js";
@@ -11,6 +12,16 @@ import { visitorCount } from "./middleware/middleware.js";
 const app = express();
 
 app.use(cookieParser());
+app.use(session({
+    secret: "paunchylist696969696969696969696969696969696969",
+    resave: false,
+    saveUnitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+        maxAge: 20*60*1000
+    }
+}))
 
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "src", "views"));

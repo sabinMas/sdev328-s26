@@ -7,7 +7,9 @@ export const getStep1 = (req, res) => {
 };
 
 export const postStep1 = (req, res) => {
-    // TODO: save step 1 data to session
+    const {firstName, lastName} = req.body;
+    req.session.firstName = firstName;
+    req.session.lastName = lastName;
 
     res.redirect("/signup/step/2");
 };
@@ -21,7 +23,9 @@ export const getStep2 = (req, res) => {
 };
 
 export const postStep2 = (req, res) => {
-    // TODO: save step 2 data to session
+    const {email, favoriteColor} = req.body;
+    req.session.email = email;
+    req.session.favoriteColor = favoriteColor;
 
     res.redirect("/signup/step/3");
 };
@@ -35,14 +39,14 @@ export const getStep3 = (req, res) => {
 };
 
 export const postStep3 = (req, res) => {
-    // TODO: save step 3 data to session
-
+   const {notes} = req.body;
+   req.session.notes = notes;
     res.redirect("/signup/done");
 };
 
 export const getDone = (req, res) => {
     res.render("done", {
-        signup: {},
+        signup: req.session,
         theme: req.theme,
         bodyClass: req.bodyClass
     });
