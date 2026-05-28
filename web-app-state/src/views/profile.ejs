@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Session</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="<%= bodyClass %>">
+    <header class="bar">
+        <div class="brand">Profile Session</div>
+        <nav class="nav">
+            <a href="/">Home</a>
+            <a href="/cookies">Cookies</a>
+            <a href="/profile">Profile</a>
+            <a href="/signup/step/1">Multi-Form</a>
+            <a href="/status">Status</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Profile</h1>
+
+        <form method="POST" action="/state/profile" class="stack">
+            <label>
+                Display name
+                <input name="displayName" value="<%= profile.displayName || "" %>">
+            </label>
+
+            <label>
+                Favorite color
+                <input name="favoriteColor" value="<%= profile.favoriteColor || "" %>">
+            </label>
+
+            <label>
+                Bio
+                <textarea name="bio" rows="4"><%= profile.bio || "" %></textarea>
+            </label>
+
+            <button type="submit">Save to Session</button>
+        </form>
+
+        <h2>Current session profile</h2>
+        <pre class="code"><%= JSON.stringify(profile, null, 4) %></pre>
+    </main>
+</body>
+</html>

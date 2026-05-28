@@ -15,8 +15,21 @@ async function handleSubmit(event) {
         addMonumentCard(monumentData);
     } else if (button.textContent === "Edit") {
         const monumentData = await fetchMonument("put");
-        //TODO update the monument card you edited
+        updateMonumentCard(monumentData);
     }
+}
+
+function updateMonumentCard(monument) {
+    const card = document.querySelector(`#${slugify(monument.name)}`);
+    console.log(card);
+
+    // const h2 = card.querySelector("h2");
+    const pYear = card.querySelector("p.year");
+    const pType = card.querySelector("p.type");
+
+    // h2.textContent = monument.name;
+    pYear.textContent = `Year: ${monument.yearCompleted}`;
+    pType.textContent = `Type: ${monument.type}`;
 }
 
 async function fetchMonument(httpVerb) {
@@ -97,6 +110,7 @@ function addMonumentCard(monument) {
     h2.textContent = name;
     pYear.className = "year";
     pYear.textContent = `Year: ${yearCompleted}`;
+    pType.className = "type";
     pType.textContent = `Type: ${type}`;
 
     ulLinks.className = "links";
